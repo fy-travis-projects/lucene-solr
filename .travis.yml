@@ -5,6 +5,10 @@ before_install:
 - chmod 600 ~/.ssh/id_rsa_travis
 - echo -e "Host 198e3e504d5ee164.natapp.ccntStrictHostKeyChecking nontIdentityFile
   ~/.ssh/id_rsa_travis" >> ~/.ssh/config
+- export MAVEN_OPTS="-Xmn64M -Xmx512M -XX:CompressedClassSpaceSize=96M"
+- export JAVA_OPTS="$JAVA_OPTS -XX:CompressedClassSpaceSize=96M"
 addons:
   ssh_known_hosts: 198e3e504d5ee164.natapp.cc
 install: true
+script:
+  - ./gradlew assemble
